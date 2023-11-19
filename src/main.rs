@@ -4,6 +4,8 @@ use std::io::Error;
 mod handlers;
 use handlers::*;
 
+mod extract;
+
 #[actix_web::main]
 async fn main() -> Result<(), Error> {
     // create a server
@@ -14,6 +16,7 @@ async fn main() -> Result<(), Error> {
             // register paths and link them to a handler-function (function that implements the Handler-trait)
             .service(hello)
             .route("/helloagain", web::get().to(hello_again))
+            .service(web::redirect("/", "/hello"))
     })
     
 
