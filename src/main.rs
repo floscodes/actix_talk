@@ -24,15 +24,3 @@ async fn main() -> Result<(), Error> {
     // .bind(("0.0.0.0", 8000)).unwrap()
     .run().await
 }
-
-
-HttpServer
-
-    App
-        URI-Path  -> Handler Function
-        "/"       -> fn()
-        "/hello"  -> fn()
-
-SET IP AND PORT
-
-RUN APP
