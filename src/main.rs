@@ -5,6 +5,7 @@ mod handlers;
 use handlers::*;
 
 mod extract;
+use extract::*;
 
 #[actix_web::main]
 async fn main() -> Result<(), Error> {
@@ -13,10 +14,13 @@ async fn main() -> Result<(), Error> {
         // create an app with paths and handler functions
         App::new()
 
-            // register paths and link them to a handler-function (function that implements the Handler-trait)
             .service(hello)
             .route("/helloagain", web::get().to(hello_again))
             .service(web::redirect("/", "/hello"))
+
+            // extraction demonstration
+            .service(extract_name_id)
+            .service(get_form_data)
     })
     
 
