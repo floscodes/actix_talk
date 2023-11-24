@@ -7,6 +7,9 @@ use handlers::*;
 mod extract;
 use extract::*;
 
+mod custom_response:
+use custom_response::*;
+
 #[actix_web::main]
 async fn main() -> Result<(), Error> {
     // create a server
@@ -21,6 +24,9 @@ async fn main() -> Result<(), Error> {
             // extraction demonstration
             .service(extract_name_id)
             .service(get_form_data)
+
+            // send customized HttpResponse
+            .service(custom_response)
     })
     
 
