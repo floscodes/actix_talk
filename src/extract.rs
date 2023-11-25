@@ -1,5 +1,6 @@
-use actix_web::{Responder, web};
+use actix_web::{Responder, web, get, post};
 use serde::Deserialize;
+use std::io::Result;
 
 #[get("/{name}/{id}")]
 pub async fn extract_name_id(path: web::Path<(String, String)>) -> impl Responder {
@@ -10,13 +11,13 @@ pub async fn extract_name_id(path: web::Path<(String, String)>) -> impl Responde
 
 // Extract GET and POST Params
 
-#[derive("Deserialize")]
+#[derive(Deserialize)]
 struct Info {
-    firstname String,
-    surname String,
+    firstname: String,
+    surname: String,
 }
 
-#[get("/getparams"), post("/postparams")]
+#[get("/getparams")]
 pub async fn get_params(info: web::Query<Info>) -> impl Responder {
     format!("Hello {} {}!", info.firstname, info.surname)
 }
