@@ -25,12 +25,19 @@ async fn main() -> Result<(), Error> {
             .route("/helloagain", web::get().to(hello_again))
             .service(web::redirect("/hi", "/hello"))
 
+            // defining a scope (the registered routes will share a common path prefix)
+            .service(
+                web::scope("/scope") 
+                            .route("/sub1", web::to(|| async {"sub1"}))
+                            .route("/sub2", web::to(|| async {"sub2"}))
+            )
+
             // extraction demonstration
             .service(extract_name_id)
             .service(get_params)
             .service(get_form_data)
 
-            // send customized HttpResponse
+            // customized HttpResponse
             .service(custom_response)
             .service(cookies)
     })
