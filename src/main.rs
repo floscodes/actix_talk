@@ -1,4 +1,4 @@
-use actix_web::{HttpServer, App, web};
+use actix_web::{HttpServer, App, web, middleware};
 use actix_files;
 use std::io::Error;
 
@@ -18,13 +18,20 @@ use files::*;
 async fn main() -> Result<(), Error> {
     // create a server
     HttpServer::new(|| {
+        
         // create an app with paths and handler functions
         App::new()
 
-            // register "/" path
+            // add middleware
+            .wrap(
+                middleware::DefaultHeaders::new().add(("x-version", "1.0"))
+            )
+            .wrap(middleware::NormalizePath::trim())
+
+            // register index
             .route("/", web::to(|| async {"index"}))
 
-            //register other routes
+            // other registrations
             .service(hello)
             .route("/helloagain", web::get().to(hello_again))
             .service(web::redirect("/hi", "/hello"))
