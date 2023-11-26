@@ -18,13 +18,20 @@ struct Info {
     surname: String,
 }
 
-#[get("/getparams")]
+#[get("/get_params")]
 pub async fn get_params(info: web::Query<Info>) -> impl Responder {
-    format!("Hello {} {}!", info.firstname, info.surname)
+    format!("Hello, {} {}!", info.firstname, info.surname)
 }
 
+
 // Extract Form Data
-#[post("/form")]
-pub async fn get_form_data(info: web::Form<Info>) -> Result<String> {
-    Ok(format!("Hello {} {}!", info.firstname, info.surname))
+#[post("/post_form")]
+pub async fn post_form(info: web::Form<Info>) -> Result<String> {
+    Ok(format!("Hello, {} {}!", info.firstname, info.surname))
 }
+
+/*
+Try out post_form in CLI:
+
+curl -X POST http://localhost:8000/post_form -H "Content-Type: application/x-www-form-urlencoded" -d "firstname=Tom&surname=Miller" 
+*/

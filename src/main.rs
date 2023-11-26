@@ -18,7 +18,7 @@ use files::*;
 async fn main() -> Result<(), Error> {
     // create a server
     HttpServer::new(|| {
-        
+
         // create an app with paths and handler functions
         App::new()
 
@@ -46,7 +46,7 @@ async fn main() -> Result<(), Error> {
             // extraction demonstration
             .service(extract_name_id)
             .service(get_params)
-            .service(get_form_data)
+            .service(post_form)
 
             // customized HttpResponse
             .service(custom_response)
