@@ -1,6 +1,5 @@
-use actix_web::{Responder, web, get, post};
+use actix_web::{Result, Responder, web, get, post};
 use serde::Deserialize;
-use std::io::Result;
 
 #[get("/{name}/{id}")]
 pub async fn extract_name_id(path: web::Path<(String, String)>) -> impl Responder {
