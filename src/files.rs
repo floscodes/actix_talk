@@ -1,10 +1,9 @@
-use actix_web::{Result, HttpRequest, get};
+use actix_web::{Result, get};
 use actix_files::NamedFile;
 use std::path::PathBuf;
 
-#[get("/{filename}")]
-pub async fn serve_static_file(req: HttpRequest) -> Result<NamedFile> {
-    let static_path = format!("./static/{}", req.match_info().query("filename"));
-    let file: PathBuf = static_path.parse().unwrap();
+#[get("/servefile")]
+pub async fn serve_static_file() -> Result<NamedFile> {
+    let file: PathBuf = "./static/logo.png".parse().unwrap();
     Ok(NamedFile::open(file)?)
 }

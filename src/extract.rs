@@ -1,10 +1,12 @@
-use actix_web::{Result, Responder, web, get, post};
+use actix_web::{HttpRequest, Result, Responder, web, get, post};
 use serde::Deserialize;
 
-#[get("/{name}/{id}")]
-pub async fn extract_name_id(path: web::Path<(String, String)>) -> impl Responder {
-    let (name, id) = path.into_inner();
-    format!("The name is: {}, id is: {}", name, id)
+#[get("/{name}/{message}/{id}")]
+pub async fn extract_name_id(req: HttpRequest) -> impl Responder {
+    let name = req.match_info().query("name");
+    let message = req.match_info().query("message");
+    let id = req.match_info().query("id");
+    format!("The name is: {}, id is: {}, message: {}", name, id, message)
 }
 
 
