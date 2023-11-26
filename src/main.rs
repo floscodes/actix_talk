@@ -49,7 +49,8 @@ async fn main() -> Result<(), Error> {
             .service(serve_static_file)
             // serve a static directory
             .service(
-                actix_files::Files::new("/static", "./static/").index_file("index.html")
+                // actix_files::Files::new("/static", std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("static")).index_file("index.html")
+                actix_files::Files::new("/static", "static")
             )
     })
     
