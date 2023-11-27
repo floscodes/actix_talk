@@ -28,12 +28,10 @@ async fn main() -> Result<(), Error> {
             )
             .wrap(middleware::NormalizePath::trim())
 
-            // register index
-            .route("/", web::to(|| async {"index"}))
 
-            // other registrations
-            .service(hello)
-            .route("/helloagain", web::get().to(hello_again))
+            // register routes
+            .route("/hello", web::to(hello))
+            .service(hello_again)
             .service(web::redirect("/hi", "/hello"))
 
             // defining a scope (the registered routes will share a common path prefix)
