@@ -6,7 +6,7 @@ pub async fn extract_name_id(req: HttpRequest) -> impl Responder {
     let name = req.match_info().query("name");
     let message = req.match_info().query("message");
     let id = req.match_info().query("id");
-    format!("The name is: {}, id is: {}, message: {}", name, id, message)
+    format!("The name is: {}, message: {}, id: {}", name, message, id)
 }
 
 
