@@ -11,9 +11,6 @@ use extract::*;
 mod custom_response;
 use custom_response::*;
 
-mod files;
-use files::*;
-
 #[actix_web::main]
 async fn main() -> Result<(), Error> {
     // create a server
@@ -50,8 +47,6 @@ async fn main() -> Result<(), Error> {
             .service(custom_response)
             .service(cookies)
 
-            // serve a static file
-            .service(serve_static_file)
             // serve a static directory
             .service(
                 // actix_files::Files::new("/static", std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("static")).index_file("index.html")
