@@ -10,8 +10,6 @@ pub async fn extract_name_id(req: HttpRequest) -> impl Responder {
 }
 
 
-// Extract GET and POST Params
-
 #[derive(Deserialize)]
 struct Info {
     firstname: String,
