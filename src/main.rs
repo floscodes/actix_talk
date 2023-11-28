@@ -45,7 +45,7 @@ async fn main() -> Result<(), Error> {
 
             // serve a static directory
             .service(
-                actix_files::Files::new("/static", "./static").show_files_listing().index_file("index.html")
+                actix_files::Files::new("/static", "./static").show_files_listing()
             )
     })
     
