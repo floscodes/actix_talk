@@ -19,12 +19,8 @@ async fn main() -> Result<(), Error> {
         // create an app with paths and handler functions
         App::new()
 
-            // add middleware
-            .wrap(
-                middleware::DefaultHeaders::new().add(("x-version", "1.0"))
-            )
+            // add middleware and accept trailing slashes sent by the client
             .wrap(middleware::NormalizePath::trim())
-
 
             // register routes
             .route("/hello", web::to(hello))
@@ -49,8 +45,7 @@ async fn main() -> Result<(), Error> {
 
             // serve a static directory
             .service(
-                // actix_files::Files::new("/static", std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("static")).index_file("index.html")
-                actix_files::Files::new("/static", "./static").show_files_listing()
+                actix_files::Files::new("/static", "./static").show_files_listing().index_file("index.html")
             )
     })
     
